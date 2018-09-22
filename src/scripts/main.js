@@ -1,1 +1,1 @@
-console.log('ojala salgas')
+console.log('ojala')

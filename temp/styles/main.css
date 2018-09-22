@@ -9,7 +9,7 @@ Are typically preprocessor functionsto extend properties properties on classes. 
   display: flex; }
 
 body {
-  background-color: gray; }
+  background-color: green; }
 
 /* Utils: 
 Make changes only for a certain style in a specific place */

@@ -63,7 +63,8 @@ gulp.task('build-src-files',
         'styles-src-fa', 
         'fonts-src-fa', 
         'scripts-src-bootstrap-jquery-popper'
-    ]);
+    ]
+);
 
 /*
 BUILD TEMP FILES
@@ -158,13 +159,21 @@ gulp.task('build-temp-files',
         'scripts-bootstrap-jquery-poppers-temp-file',
         'scripts-temp-file',
         'img-temp-file'
-    ]);
+    ]
+);
+
+// Set up BrowserSync and run a local server from temp
+gulp.task('serve', () => {
+    browserSync.init({
+      server: "./temp"
+    });
+  });
 
 // WATCH TEMP FILES
 gulp.task('watch', () => {
-    gulp.watch('src/*.html', ['html-temp-file'])
-    gulp.watch('src/styles/**/*.scss', ['styles-bootstrap-fa-temp-file', 'styles-temp-file'])
-    gulp.watch('src/scripts/*.js', ['scripts-temp-file'])
+    gulp.watch('src/*.html', ['html-temp-file']).on('change', browserSync.reload)
+    gulp.watch('src/styles/**/*.scss', ['styles-bootstrap-fa-temp-file', 'styles-temp-file']).on('change', browserSync.reload)
+    gulp.watch('src/scripts/*.js', ['scripts-temp-file']).on('change', browserSync.reload)
 });
 
 // RUN NEW PROJECT
@@ -172,5 +181,6 @@ gulp.task('default',
     [
         'build-src-files',
         'build-temp-files',
+        'serve',
         'watch'
     ]);
