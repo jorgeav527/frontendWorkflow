@@ -6,10 +6,12 @@ const gulp        = require('gulp'),
     concat            = require('gulp-concat'),
     imagemin          = require('gulp-imagemin'),
     htmlmin           = require('gulp-htmlmin'),
-    uglyfly          = require('gulp-uglyfly'),
+    uglyfly           = require('gulp-uglyfly'),
     autoprefixer      = require('gulp-autoprefixer'),
     cleanCss          = require('gulp-clean-css'),
-    plumber           = require('gulp-plumber');
+    plumber           = require('gulp-plumber'),
+    jshint            = require('gulp-jshint'),
+    clean             = require('gulp-clean-fix');
 
 
 //========= PATHS ==========//
@@ -128,6 +130,7 @@ gulp.task('scripts-bootstrap-jquery-poppers-temp-file', () => {
 gulp.task('scripts-temp-file', () => {
     gulp.src('src/scripts/*.js')
         .pipe(sourcemaps.init())
+        .pipe(jshint())
         .pipe(concat('main.js'))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('temp/scripts'))
@@ -269,4 +272,20 @@ gulp.task('default',
     ]
 );
 
+// CLEAN SRC TEMP AND DIST PROJECT 
+gulp.task('clean-temp', () => {
+    gulp.src('temp/*', {read: false})
+        .pipe(clean());
+});
 
+gulp.task('clean-dist', () => {
+    gulp.src('dist/*', {read: false})
+        .pipe(clean());
+});
+
+gulp.task('clean', 
+    [
+        'clean-temp',
+        'clean-dist'
+    ]
+);

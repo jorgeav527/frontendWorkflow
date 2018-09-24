@@ -20,6 +20,7 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-clean-css": "^3.10.0",
+    "gulp-clean-fix": "^0.3.4",
     "gulp-concat": "^2.6.1",
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^4.1.0",
@@ -28,7 +29,8 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglyfly": "^1.4.2"
+    "gulp-uglyfly": "^1.4.2",
+    "jshint": "^2.9.6"
   },
   "repository": {
     "type": "git",
