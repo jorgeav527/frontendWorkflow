@@ -1,23 +1,25 @@
 //========= VARIABLES ==========//
 const gulp        = require('gulp'),
-    browserSync       = require('browser-sync').create(),
-    sass              = require('gulp-sass'),
-    sourcemaps        = require('gulp-sourcemaps'),
-    concat            = require('gulp-concat'),
-    imagemin          = require('gulp-imagemin'),
-    htmlmin           = require('gulp-htmlmin'),
-    uglyfly           = require('gulp-uglyfly'),
-    autoprefixer      = require('gulp-autoprefixer'),
-    cleanCss          = require('gulp-clean-css'),
-    plumber           = require('gulp-plumber'),
-    jshint            = require('gulp-jshint'),
-    clean             = require('gulp-clean-fix');
+    browserSync     = require('browser-sync').create(),
+    sass            = require('gulp-sass'),
+    sourcemaps      = require('gulp-sourcemaps'),
+    concat          = require('gulp-concat'),
+    imagemin        = require('gulp-imagemin'),
+    htmlmin         = require('gulp-htmlmin'),
+    uglyfly         = require('gulp-uglyfly'),
+    autoprefixer    = require('gulp-autoprefixer'),
+    cleanCss        = require('gulp-clean-css'),
+    plumber         = require('gulp-plumber'),
+    jshint          = require('gulp-jshint'),
+    clean           = require('gulp-clean-fix');
 
 
 //========= PATHS ==========//
-const src = [],
-    temp = [],
-    dist = [];
+// const paths = {
+//     src: 'src',
+//     temp: 'temp',
+//     dist: 'dist',
+// };
 
 /*
 BUILD SRC FILES
@@ -78,7 +80,7 @@ BUILD TEMP FILES
 //=========  HTML TEMP FILES  ==========//
 // Copy and concat HTML files to temp
 gulp.task('html-temp-file', () => {
-    gulp.src('src/*.html')
+    gulp.src('src/html/*.html')
         .pipe(concat('index.html'))
         .pipe(gulp.dest('temp'));
 });
@@ -178,7 +180,7 @@ gulp.task('serve', () => {
 
 // WATCH TEMP FILES
 gulp.task('watch', () => {
-    gulp.watch('src/*.html', ['html-temp-file']).on('change', browserSync.reload)
+    gulp.watch('src/html/*.html', ['html-temp-file']).on('change', browserSync.reload)
     gulp.watch('src/styles/**/*.scss', ['styles-bootstrap-fa-temp-file', 'styles-temp-file']).on('change', browserSync.reload)
     gulp.watch('src/scripts/*.js', ['scripts-temp-file']).on('change', browserSync.reload)
     gulp.watch('src/img/**/*', ['img-temp-file']).on('change', browserSync.reload)
@@ -190,8 +192,7 @@ BUILD DIST FILES
 //=========  HTML DIST FILES  ==========//
 // Copy concat and minify  HTML files to dist
 gulp.task('html-dist-file', () => {
-    gulp.src('src/*.html')
-        .pipe(concat('index.html'))
+    gulp.src('temp/*.html')
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest('dist'));
 });
@@ -289,3 +290,4 @@ gulp.task('clean',
         'clean-dist'
     ]
 );
+
